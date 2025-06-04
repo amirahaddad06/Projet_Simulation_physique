@@ -14,7 +14,7 @@ class TurtleDifferentialMotor:
         self.color = color
         self.traj = []
 
-        # 🧠 Deux moteurs CC (un par roue)
+        #  Deux moteurs CC (un par roue)
         self.moteur_g = MoteurCC()
         self.moteur_d = MoteurCC()
 
