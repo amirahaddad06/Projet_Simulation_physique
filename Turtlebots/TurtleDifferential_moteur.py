@@ -15,8 +15,9 @@ class TurtleDifferentialMotor:
         self.traj = []
 
         #  Deux moteurs CC (un par roue)
-        self.moteur_g = MoteurCC()
-        self.moteur_d = MoteurCC()
+        self.moteur_g = MoteurCC(kc=0.05, ke=0.01, f=0.02)
+        self.moteur_d = MoteurCC(kc=0.05, ke=0.01, f=0.02)
+
 
     def setVoltages(self, Ug, Ud):
         self.moteur_g.setVoltage(Ug)
