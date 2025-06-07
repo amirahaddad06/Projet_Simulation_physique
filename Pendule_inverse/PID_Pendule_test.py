@@ -6,7 +6,7 @@ from ControlPID_Pendule import ControlPID_Pendule
 g, L, dt = 9.81, 1.0, 0.0001
 pixels_per_m = 200
 UM_MAX = 12.0
-RESTIT = 0.85
+RESTIT = 0.85  
 MARGE = 60
 
 # État initial
@@ -15,7 +15,7 @@ omega = 0.0
 moteur = MoteurCC()
 v_prev = 0.0
 
-# PID bien réglé (modéré)
+ 
 pid = ControlPID_Pendule(Kp=80, Kd=20, Ki=0.2)
 
 # Pygame
@@ -47,13 +47,13 @@ while running:
     x_b = moteur.getPosition()
     v_b = moteur.getSpeed()
 
-    # 🎯 Correction : angle effectif mesuré depuis le HAUT
+    #  Correction : angle effectif mesuré depuis le HAUT
     theta_eff = theta - math.pi
 
     # PID → tension moteur
     Um = pid.compute(theta_eff, omega, dt)
 
-    # 🕹️ Intervention clavier : ajouter ou retirer de la tension
+    #  Intervention clavier : ajouter ou retirer de la tension
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         Um -= 1.0  # coup à gauche
