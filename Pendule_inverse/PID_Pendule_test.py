@@ -3,14 +3,14 @@ from MoteurCC import MoteurCC
 from ControlPID_Pendule import ControlPID_Pendule
 
 # Constantes physiques et graphiques
-g, L, dt = 9.81, 1.0, 0.01
+g, L, dt = 9.81, 1.0, 0.0001
 pixels_per_m = 200
 UM_MAX = 12.0
 RESTIT = 0.85
 MARGE = 60
 
 # État initial
-theta = math.radians(2)  # presque vertical
+theta = math.radians(2)   
 omega = 0.0
 moteur = MoteurCC()
 v_prev = 0.0
