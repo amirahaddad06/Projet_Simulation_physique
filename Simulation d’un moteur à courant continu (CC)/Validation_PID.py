@@ -66,5 +66,5 @@ def validation_PID(Kp=1.0, Ki=0.0, title="Correcteur PID"):
     plt.show()
 
 # Tests avec P seul puis PI
-validation_PID(Kp=1.0, Ki=0.0, title="Réponse avec correcteur P seul")
+validation_PID(Kp=2.0, Ki=0.0, title="Réponse avec correcteur P seul")
 validation_PID(Kp=1.0, Ki=2.0, title="Réponse avec correcteur PI")
