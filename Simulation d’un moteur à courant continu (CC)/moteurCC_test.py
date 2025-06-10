@@ -1,20 +1,20 @@
 import matplotlib.pyplot as plt
 from MoteurCC import MoteurCC
 
-# --- Créer un moteur avec des paramètres réalistes ---
+#  Créer un moteur avec des paramètres réalistes 
 m = MoteurCC(
     R=1.0,       # résistance (ohms)
-    L=0.0,       # négligé (optionnel)
-    kc=0.1,      # constante couple (↗ plus = plus de puissance)
-    ke=0.01,     # constante FEM (↘ plus = démarre vite)
+    L=0.0,       
+    kc=0.1,      # constante couple  
+    ke=0.01,     # constante FEM  
     J=0.01,      # inertie
-    f=0.01       # frottement (↘ plus = plus fluide)
+    f=0.01       # frottement  
 )
 
-# --- Appliquer une tension constante ---
+#  Appliquer une tension constante 
 m.setVoltage(6.0)
 
-# --- Simulation dynamique ---
+# Simulation 
 omegas = []
 intensites = []
 times = []
@@ -27,7 +27,7 @@ for _ in range(500):
     times.append(t)
     t += dt
 
-# --- Affichage des résultats ---
+#  Affichage des résultats 
 plt.figure(figsize=(10, 5))
 
 plt.subplot(2, 1, 1)

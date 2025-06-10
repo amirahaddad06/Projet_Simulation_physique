@@ -5,7 +5,7 @@ class MoteurCC:
                  charge_inertie=0.0, couple_externe=0.0, viscosite_suppl=0.0):
         # --- Caractéristiques physiques ---
         self.R = R                          # Résistance de l'induit
-        self.L = L                          # Inductance (sera ignorée car L ≈ 0)
+        self.L = L                          # Inductance 
         self.kc = kc                        # Constante de couple
         self.ke = ke                        # Constante de FCEM
         self.J = J + charge_inertie         # Inertie totale (rotor + charge)
@@ -58,7 +58,7 @@ class MoteurCC:
         # Calcul de la force contre-électromotrice
         E = self.ke * self.omega
 
-        # Loi d’Ohm : calcul du courant (L ≈ 0)
+        # Loi d’Ohm : calcul du courant 
         self.i = (self.Um - E) / self.R
 
         # Calcul du couple moteur

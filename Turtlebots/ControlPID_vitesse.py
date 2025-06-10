@@ -19,16 +19,16 @@ class ControlPID_vitesse:
         return self.__str__()
 
     def setTarget(self, vitesse):
-        self.target_speed = vitesse
+        self.target_speed = vitesse    # la consigne 
 
     def getVoltage(self, dt=0.01):
-        error = self.target_speed - self.moteur.getSpeed()
+        error = self.target_speed - self.moteur.getSpeed()    
         self.integral += error * dt
         derivative = (error - self.prev_error) / dt
         self.prev_error = error
 
-        voltage = self.Kp * error + self.Ki * self.integral + self.Kd * derivative
-        return voltage
+        voltage = self.Kp * error + self.Ki * self.integral + self.Kd * derivative 
+        return voltage   # tension 
 
     def simule(self, step):
         V = self.getVoltage(step)

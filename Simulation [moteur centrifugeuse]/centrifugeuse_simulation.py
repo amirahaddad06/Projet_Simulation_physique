@@ -6,30 +6,30 @@ from vector3D import Vector3D as V3D
 from MoteurCC import MoteurCC
 from types import MethodType
 
-# === Univers ===
+#   Univers  
 univ = Univers(name="centrifugeuse", step=0.001, dimensions=(60, 60), game=True, gameDimensions=(900, 800), fps=60)
 
-# === Moteur CC ===
+# Moteur CC 
 moteur = MoteurCC(kc=0.01, ke=0.01, J=0.01, f=0.02)
 moteur.setVoltage(0.0)
 
-# === Particules ===
+#  Particules 
 centre = V3D(30, 30, 0)
 direction_init = V3D(0, 1, 0)
 d_init = 0.1
 P_centre = Particule(p0=centre, fix=True, mass=1)
 P_mobile = Particule(p0=centre + direction_init * d_init, mass=1.0, color='blue')
 
-# === Ressort + amortisseur ===
+#  Ressort + amortisseur 
 ressort = SpringDamper(P_centre, P_mobile, k=30.0, c=0.3, l0=0.0)
 univ.addParticule(P_centre, P_mobile)
 univ.addGenerators(ressort)
 
-# === Enregistrement des données ===
+#  Enregistrement des données 
 omega_list = []
 d_list = []
 
-# === Interaction clavier simplifiée ===
+#  Interaction clavier simplifiée 
 def interaction(self, events, keys):
     screen = pygame.display.get_surface()
 
@@ -66,10 +66,10 @@ def interaction(self, events, keys):
 
 univ.gameInteraction = MethodType(interaction, univ)
 
-# === Lancement de la simulation ===
+ 
 univ.simulateRealTime()
 
-# === Graphe final ===
+ 
 plt.figure(figsize=(8, 5))
 plt.plot(omega_list, d_list, '.', alpha=0.6, label="d(t) vs ω(t)")
 plt.xlabel("Vitesse ω (rad/s)")

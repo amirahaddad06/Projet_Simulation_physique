@@ -14,7 +14,7 @@ class TurtleDifferential:
         self.vd = 0.0               # Vitesse linéaire roue droite (m/s)
 
         self.color = color
-        self.traj = []              # Historique pour tracer la trajectoire
+        self.traj = []              
 
     def setWheelSpeeds(self, vg, vd):
         self.vg = vg

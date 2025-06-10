@@ -1,6 +1,6 @@
 import pygame
 import math
-from TurtleDifferential import TurtleDifferential  # Assure-toi que ce module est dans le dossier
+from TurtleDifferential import TurtleDifferential   
 
 # Pygame init
 pygame.init()
@@ -25,7 +25,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # 🎮 Contrôle clavier flèches
+    #  Contrôle clavier flèches
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP]:
         vg += delta_v

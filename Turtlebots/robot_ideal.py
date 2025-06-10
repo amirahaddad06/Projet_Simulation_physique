@@ -2,8 +2,8 @@ import pygame
 import matplotlib.pyplot as plt
 from TurtleDifferential import TurtleDifferential
 
-# Trajectoire : avance + virage gauche + virage droit + stop
-def get_vg_vd(t):
+ 
+def get_vg_vd(t):   
     if t < 3:
         return 0.4, 0.4          # ligne droite
     elif t < 6:
@@ -12,8 +12,7 @@ def get_vg_vd(t):
         return 0.4, 0.2          # virage à droite
     else:
         return 0.0, 0.0          # arrêt
-
-# --- Init Pygame ---
+ 
 pygame.init()
 WIDTH, HEIGHT = 1000, 800
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -53,8 +52,8 @@ while running:
     t += dt
 
 pygame.quit()
+ 
 
-# --- Plot ---
 plt.figure()
 plt.plot(t_list, vg_list, label="vg (m/s)", color="blue")
 plt.plot(t_list, vd_list, label="vd (m/s)", color="red")

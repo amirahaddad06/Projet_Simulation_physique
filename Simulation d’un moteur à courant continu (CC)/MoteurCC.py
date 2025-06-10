@@ -3,22 +3,21 @@ import matplotlib.pyplot as plt
 class MoteurCC:
     def __init__(self, R=1.0, L=0.001, kc=0.01, ke=0.01, J=0.01, f=0.1,
                  charge_inertie=0.0, couple_externe=0.0, viscosite_suppl=0.0):
-        # --- Caractéristiques physiques ---
+        #  Caractéristiques physiques 
         self.R = R                          # Résistance de l'induit
-        self.L = L                          # Inductance (sera ignorée car L ≈ 0)
+        self.L = L                          # Inductance 
         self.kc = kc                        # Constante de couple
         self.ke = ke                        # Constante de FCEM
         self.J = J + charge_inertie         # Inertie totale (rotor + charge)
         self.f = f + viscosite_suppl        # Frottement visqueux total
         self.couple_externe = couple_externe  # Couple résistant externe
 
-        # --- États internes du moteur ---
+       
         self.Um = 0.0       # Tension appliquée
         self.i = 0.0        # Courant dans l’induit
         self.omega = 0.0    # Vitesse angulaire (rad/s)
         self.theta = 0.0    # Position angulaire (rad)
-
-        # --- Historique pour visualisation ---
+  
         self.historique_temps = [0.0]
         self.historique_omega = [0.0]
         self.historique_i = [0.0]
@@ -58,7 +57,7 @@ class MoteurCC:
         # Calcul de la force contre-électromotrice
         E = self.ke * self.omega
 
-        # Loi d’Ohm : calcul du courant (L ≈ 0)
+        # Loi d’Ohm : calcul du courant  
         self.i = (self.Um - E) / self.R
 
         # Calcul du couple moteur
@@ -72,8 +71,7 @@ class MoteurCC:
 
         # Intégration de la position
         self.theta += self.omega * step
-
-        # Enregistrement des données pour affichage
+ 
         t = self.historique_temps[-1] + step
         self.historique_temps.append(t)
         self.historique_omega.append(self.omega)
@@ -82,7 +80,7 @@ class MoteurCC:
         self.historique_couple.append(couple_moteur)
 
     def plot_v(self):
-        # --- Tracé de la vitesse ---
+        #  Tracé de la vitesse 
         plt.figure(figsize=(8,5))
         plt.plot(self.historique_temps, self.historique_omega, label='Vitesse (rad/s)')
         plt.xlabel('Temps (s)')

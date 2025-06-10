@@ -5,20 +5,20 @@ class MoteurCC:
                  charge_inertie=0.0, couple_externe=0.0, viscosite_suppl=0.0):
         # --- Caractéristiques physiques ---
         self.R = R                          # Résistance de l'induit
-        self.L = L                          # Inductance (sera ignorée car L ≈ 0)
+        self.L = L                           
         self.kc = kc                        # Constante de couple
         self.ke = ke                        # Constante de FCEM
         self.J = J + charge_inertie         # Inertie totale (rotor + charge)
         self.f = f + viscosite_suppl        # Frottement visqueux total
         self.couple_externe = couple_externe  # Couple résistant externe
 
-        # --- États internes du moteur ---
+     
         self.Um = 0.0       # Tension appliquée
-        self.i = 0.0        # Courant dans l’induit
-        self.omega = 0.0    # Vitesse angulaire (rad/s)
-        self.theta = 0.0    # Position angulaire (rad)
+        self.i = 0.0        # Courant 
+        self.omega = 0.0    # Vitesse angulaire 
+        self.theta = 0.0    # Position angulaire  
 
-        # --- Historique pour visualisation ---
+       # pour laffichage 
         self.historique_temps = [0.0]
         self.historique_omega = [0.0]
         self.historique_i = [0.0]
@@ -26,7 +26,7 @@ class MoteurCC:
         self.historique_couple = [0.0]
 
     def __str__(self):
-        # Affichage lisible de l’état actuel
+        # Affichage   de l’état actuel
         return f"MoteurCC(omega={self.omega:.3f}, i={self.i:.3f}, theta={self.theta:.3f})"
 
     def __repr__(self):
@@ -52,13 +52,12 @@ class MoteurCC:
         # Retourner le courant électrique
         return self.i
 
-    def simule(self, step):
-        # --- Simulation d’un pas de temps ---
+    def simule(self, step): 
 
         # Calcul de la force contre-électromotrice
         E = self.ke * self.omega
 
-        # Loi d’Ohm : calcul du courant (L ≈ 0)
+        # Loi dOhm : calcul du courant  
         self.i = (self.Um - E) / self.R
 
         # Calcul du couple moteur
@@ -73,7 +72,7 @@ class MoteurCC:
         # Intégration de la position
         self.theta += self.omega * step
 
-        # Enregistrement des données pour affichage
+        
         t = self.historique_temps[-1] + step
         self.historique_temps.append(t)
         self.historique_omega.append(self.omega)
@@ -82,7 +81,7 @@ class MoteurCC:
         self.historique_couple.append(couple_moteur)
 
     def plot_v(self):
-        # --- Tracé de la vitesse ---
+      
         plt.figure(figsize=(8,5))
         plt.plot(self.historique_temps, self.historique_omega, label='Vitesse (rad/s)')
         plt.xlabel('Temps (s)')
@@ -95,7 +94,7 @@ class MoteurCC:
 
 
     def plot(self):
-        # --- Tracé des courbes ---
+       
         plt.figure(figsize=(10,6))
 
         # Vitesse

@@ -4,13 +4,13 @@ from TurtleDifferential import TurtleDifferential
 from TurtleDifferential_moteur import TurtleDifferentialMotor
 from ControlPID_vitesse import ControlPID_vitesse
 
-# ---------- Trajectoire en 8 ----------
+ 
 def trajectory_8(t, A=0.5, w=0.5):
     x = A * math.sin(w * t)
     y = A * math.sin(w * t) * math.cos(w * t)
     return x, y
 
-# ---------- Calcul des vitesses cibles ----------
+ # calcul de vitesse 
 def compute_target_wheel_speeds(t, dt, L=0.2):
     x1, y1 = trajectory_8(t)
     x2, y2 = trajectory_8(t + dt)
@@ -29,7 +29,7 @@ def compute_target_wheel_speeds(t, dt, L=0.2):
     vd = v + (L / 2) * omega
     return vg, vd
 
-# ---------- Init Pygame ----------
+ 
 pygame.init()
 WIDTH, HEIGHT = 900, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -37,14 +37,14 @@ pygame.display.set_caption("Comparaison suivi de trajectoire – robot idéal vs
 font = pygame.font.SysFont(None, 26)
 clock = pygame.time.Clock()
 
-# ---------- Robots ----------
+ 
 robot_ideal = TurtleDifferential()
 robot_motor = TurtleDifferentialMotor()
 
 pid_g = ControlPID_vitesse(robot_motor.moteur_g, Kp=8.0, Ki=3.0)
 pid_d = ControlPID_vitesse(robot_motor.moteur_d, Kp=8.0, Ki=3.0)
 
-# ---------- Simulation ----------
+ 
 dt = 0.02
 t = 0.0
 origin = (WIDTH // 2, HEIGHT // 2)
@@ -57,22 +57,21 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # 1. Calcule la consigne de vitesses des roues
+    #  Calcule la consigne de vitesses des roues
     vg, vd = compute_target_wheel_speeds(t, dt)
 
-    # 2. Applique directement au robot idéal
+    #  Applique directement au robot idéal
     robot_ideal.setWheelSpeeds(vg, vd)
     robot_ideal.simule(dt)
 
-    # 3. Applique la consigne aux PID des moteurs
+    #  Applique la consigne aux PID des moteurs
     pid_g.setTarget(vg)
     pid_d.setTarget(vd)
 
-    # 4. Met à jour les PID → tension moteur
+    #  Met à jour les PID  tension moteur
     pid_g.simule(dt)
     pid_d.simule(dt)
-
-    # 5. Met à jour le robot moteur (qui lit ses tensions)
+ 
     robot_motor.simule(dt)
 
     # 6. Trace la trajectoire théorique

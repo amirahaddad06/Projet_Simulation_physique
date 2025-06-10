@@ -25,7 +25,7 @@ class LiaisonMixte(Liaison):
         # Déplacer toute la barre
         self.barre2.position += deplacement
 
-        # Correction rotation : réaligner la barre par rapport à la direction de glissement
+        # Correction rotation  
         A2_corrige, B2_corrige = self.barre2.getExtremities()
         vecteur_barre = B2_corrige - A2_corrige
 
@@ -38,6 +38,6 @@ class LiaisonMixte(Liaison):
         # Appliquer la correction de rotation
         self.barre2.orientation += correction_angle
 
-        # Correction des vitesses (optionnel mais mieux)
+        # Correction des vitesses  
         v = self.barre2.vitesse_lin
         self.barre2.vitesse_lin = (v ** self.direction) * self.direction

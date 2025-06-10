@@ -5,14 +5,14 @@ class MoteurCC:
                  charge_inertie=0.0, couple_externe=0.0, viscosite_suppl=0.0):
         # --- Caractéristiques physiques ---
         self.R = R                          # Résistance de l'induit
-        self.L = L                          # Inductance (sera ignorée car L ≈ 0)
+        self.L = L                          # Inductance  
         self.kc = kc                        # Constante de couple
         self.ke = ke                        # Constante de FCEM
         self.J = J + charge_inertie         # Inertie totale (rotor + charge)
         self.f = f + viscosite_suppl        # Frottement visqueux total
         self.couple_externe = couple_externe  # Couple résistant externe
 
-        # --- États internes du moteur ---
+    
         self.Um = 0.0       # Tension appliquée
         self.i = 0.0        # Courant dans l’induit
         self.omega = 0.0    # Vitesse angulaire (rad/s)

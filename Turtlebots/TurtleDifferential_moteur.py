@@ -24,7 +24,7 @@ class TurtleDifferentialMotor:
         self.moteur_d.setVoltage(Ud)
 
     def simule(self, dt):
-        # Mise à jour des moteurs
+        
         self.moteur_g.simule(dt)
         self.moteur_d.simule(dt)
 

@@ -11,7 +11,7 @@ omega = 0.0
 dt = 0.01
 t = 0.0
 
-# Historique pour tracé
+ 
 t_hist = []
 theta_hist = []
 theta_lin_hist = []
@@ -51,7 +51,7 @@ while running:
     base_pos = to_screen(0, 0)
     bob_pos = to_screen(x, y)
 
-    # Dessiner la base (rectangle centré horizontalement)
+    # Dessiner la base  
     pygame.draw.rect(screen, (100, 100, 100), (base_pos[0] - 20, base_pos[1] - 5, 40, 10))
     pygame.draw.line(screen, (0, 0, 0), base_pos, bob_pos, 3)
     pygame.draw.circle(screen, (0, 0, 255), bob_pos, 10)

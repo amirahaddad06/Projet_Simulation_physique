@@ -40,7 +40,7 @@ class Barre2D:
         self.vitesse_ang += ang_accel * dt
         self.orientation += self.vitesse_ang * dt
 
-        # Ajout : stabilisation par freinage visqueux
+        
         frein_lin = 0.98
         frein_ang = 0.98
         self.vitesse_lin = self.vitesse_lin * frein_lin

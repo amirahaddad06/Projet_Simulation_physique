@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-# Modèle avec L ≈ 0
+# Modèle avec L = 0
 class MoteurCC:
     def __init__(self, R=1.0, kc=0.01, ke=0.01, J=0.01, f=0.1):
         self.R = R
@@ -32,7 +32,7 @@ class MoteurCC:
         self.omega_hist.append(self.omega)
         self.torque_hist.append(torque)
 
-# Modèle avec L ≠ 0 (réaliste)
+# Modèle avec L ≠ 0  
 class MoteurCC_L:
     def __init__(self, R=1.0, L=0.5, kc=0.01, ke=0.01, J=0.01, f=0.1):
         self.R = R

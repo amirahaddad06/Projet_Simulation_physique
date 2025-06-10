@@ -1,7 +1,7 @@
 class Vector3D():
-    """Classe vecteur 3D (x,y,z)"""
+     
     def __init__(self,x=0,y=0,z=0):
-        """Constructeur avec des valeur par défaut nulles"""
+        
         self.x = x
         self.y = y
         self.z = z

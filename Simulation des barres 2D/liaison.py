@@ -13,7 +13,7 @@ class Liaison(ABC):
     def appliquerContrainte(self):
         pass
 
-# --- Liaison Pivot : autoriser la rotation autour d'un point fixe ---
+ 
 class LiaisonPivot(Liaison):
     def __init__(self, barre1, barre2, point_pivot):
         super().__init__(barre1, barre2)
@@ -27,11 +27,11 @@ class LiaisonPivot(Liaison):
         self.barre2.position += correction
         # Remarque : on laisse la barre tourner librement (pas de correction d'orientation ici)
 
-# --- Liaison Prismatique : autoriser seulement le glissement dans une direction ---
+# Liaison Prismatique : autoriser seulement le glissement dans une direction 
 class LiaisonPrismatique(Liaison):
     def __init__(self, barre1, barre2, direction):
         super().__init__(barre1, barre2)
-        self.direction = direction.norm()  # Direction du coulissement autorisé (normalisée)
+        self.direction = direction.norm()  # Direction du coulissement autorisé 
 
     def appliquerContrainte(self):
         # Correction uniquement perpendiculaire à la direction de glissement
