@@ -1,53 +1,74 @@
 import pygame
 import math
+import matplotlib.pyplot as plt
 
-# ----- Paramètres physiques -----
-g = 9.81              # gravité (m/s²)
-L = 1.0               # longueur du pendule (m)
-m = 1.0               # masse du pendule (kg)
-dt = 0.01             # pas de temps (s)
+# Constantes physiques
+g = 9.81
+l = 1.0
+m = 1.0
+theta = math.radians(20)
+omega = 0.0
+dt = 0.01
+t = 0.0
 
-# ----- État initial -----
-theta = math.radians(180-5)  # angle initial en radians
-omega = 0.0               # vitesse angulaire
-x_base = 400              # position horizontale de la base (pixels, fixe)
+# Historique pour tracé
+t_hist = []
+theta_hist = []
+theta_lin_hist = []
 
-# ----- Initialisation Pygame -----
+# Pygame setup
 pygame.init()
-WIDTH, HEIGHT = 800, 600
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Pendule inversé - Étape 1 (libre)")
+screen = pygame.display.set_mode((600, 400))
+pygame.display.set_caption("Pendule simple — Base fixe avec base visible")
 clock = pygame.time.Clock()
-font = pygame.font.SysFont(None, 24)
 
-# ----- Dessin du système -----
-def draw_pendulum(theta, x_base):
-    origin = (int(x_base), HEIGHT // 2)
-    x = origin[0] + int(L * 200 * math.sin(theta))
-    y = origin[1] + int(L * 200 * math.cos(theta))
-    pygame.draw.line(screen, (0, 0, 0), origin, (x, y), 4)
-    pygame.draw.circle(screen, (150, 0, 0), (x, y), 10)
-    pygame.draw.rect(screen, (100, 100, 255), (x_base - 30, origin[1] - 10, 60, 20))  # base
+def to_screen(x, y):
+    return int(300 + x * 100), int(200 - y * 100)
 
-# ----- Boucle principale -----
 running = True
 while running:
-    screen.fill((240, 240, 240))
+    screen.fill((255, 255, 255))
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    # ----- Dynamique du pendule (équation de la chute) -----
-    alpha = -(g / L) * math.sin(theta)  # accélération angulaire
-    omega += alpha * dt                # mise à jour de la vitesse
-    theta += omega * dt               # mise à jour de l’angle
+    # Équation du pendule
+    alpha = - (g / l) * math.sin(theta)
+    omega += alpha * dt
+    theta += omega * dt
+    t += dt
 
-    # ----- Affichage -----
-    draw_pendulum(theta, x_base)
-    txt = font.render(f"θ = {math.degrees(theta):.2f}°", True, (0, 0, 0))
-    screen.blit(txt, (10, 10))
+    # Enregistrement
+    t_hist.append(t)
+    theta_hist.append(math.degrees(theta))
+    theta_lin = math.radians(15) * math.cos(math.sqrt(g / l) * t)
+    theta_lin_hist.append(math.degrees(theta_lin))
+
+    # Dessin du pendule
+    x = l * math.sin(theta)
+    y = l * math.cos(theta)
+    base_pos = to_screen(0, 0)
+    bob_pos = to_screen(x, y)
+
+    # Dessiner la base (rectangle centré horizontalement)
+    pygame.draw.rect(screen, (100, 100, 100), (base_pos[0] - 20, base_pos[1] - 5, 40, 10))
+    pygame.draw.line(screen, (0, 0, 0), base_pos, bob_pos, 3)
+    pygame.draw.circle(screen, (0, 0, 255), bob_pos, 10)
 
     pygame.display.flip()
     clock.tick(60)
 
 pygame.quit()
+
+# Tracé matplotlib
+plt.figure(figsize=(10, 4))
+plt.plot(t_hist, theta_hist, label="Simulation numérique")
+plt.plot(t_hist, theta_lin_hist, '--', label="Solution analytique linéarisée")
+plt.xlabel("Temps (s)")
+plt.ylabel("Angle θ (°)")
+plt.title("Pendule simple avec base fixe")
+plt.legend()
+plt.grid()
+plt.tight_layout()
+plt.show()
