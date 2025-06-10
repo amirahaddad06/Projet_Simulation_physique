@@ -10,17 +10,17 @@ RESTIT = 0.85
 MARGE = 60
 
 # === État initial ===
-theta = math.radians(2)  # pendule presque vertical
+theta = math.radians(2)  # pendule presque vertical  
 omega = 0.0
 moteur = MoteurCC()
 v_prev = 0.0
-pid = ControlPID_Pendule(Kp=250, Kd=20, Ki=2, setpoint=0.0)
+pid = ControlPID_Pendule(Kp=250, Kd=20, Ki=2, setpoint=0.0)   
 
-# === Setup Pygame ===
+# === Setup Pygame ===  
 pygame.init()
 WIDTH, HEIGHT = 900, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Pendule inversé — PID + moteur CC")
+pygame.display.set_caption("Pendule inversé — PID + moteur CC") 
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 24)
 
