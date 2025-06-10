@@ -14,7 +14,7 @@ theta = math.radians(2)  # pendule presque vertical
 omega = 0.0
 moteur = MoteurCC()
 v_prev = 0.0
-pid = ControlPID_Pendule(Kp=150, Kd=20, Ki=0.5, setpoint=0.0)
+pid = ControlPID_Pendule(Kp=250, Kd=20, Ki=2, setpoint=0.0)
 
 # === Setup Pygame ===
 pygame.init()
