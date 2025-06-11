@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 class MoteurCC:
     def __init__(self, R=1.0, L=0.001, kc=0.01, ke=0.01, J=0.01, f=0.1,
                  charge_inertie=0.0, couple_externe=0.0, viscosite_suppl=0.0):
-        # --- Caractéristiques physiques ---
+        #  Caractéristiques physiques 
         self.R = R                          # Résistance de l'induit
         self.L = L                           
         self.kc = kc                        # Constante de couple
